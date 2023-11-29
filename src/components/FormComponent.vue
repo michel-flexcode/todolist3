@@ -14,6 +14,7 @@
       <tr>
         <th>Nom</th>
         <th>Action</th>
+        <th>Sélectionner</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,9 @@
         <td>{{ element }}</td>
         <td>
           <button @click="supprimerElement(index)">Supprimer</button>
+        </td>
+        <td>
+          <input type="checkbox" v-model="tableauSelection[index]" />
         </td>
       </tr>
     </tbody>
@@ -31,12 +35,11 @@
 </template>
 
 <script setup>
-import TableauComponent from "./TableauComponent.vue";
-
 import { ref } from "vue";
 
-const tableau = ref([]);
+const tableau = ref(["Element 1", "Element 2", "Element 3"]);
 const nouvelElement = ref("");
+const tableauSelection = ref(Array(tableau.value.length).fill(false));
 
 const ajouterElement = () => {
   if (nouvelElement.value.trim() !== "") {
